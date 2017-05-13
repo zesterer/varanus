@@ -1,0 +1,13 @@
+EXEC=varanus
+
+MBED_EXEC=mbed
+GDB_EXEC=arm-none-eabi-gdb
+
+TOOLCHAIN=GCC_ARM
+TARGET=NUCLEO_F401RE
+
+build:
+	$(MBED_EXEC) compile -t $(TOOLCHAIN) -m $(TARGET)
+
+run:
+	$(GDB_EXEC) BUILD/NUCLEO_F401RE/GCC_ARM/$(EXEC).elf
