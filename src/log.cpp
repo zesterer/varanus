@@ -52,11 +52,17 @@ namespace Varanus
 			if (strcmp(argv[1], "delete") == 0)
 				log_delete(argc, argv);
 			else
+			if (strcmp(argv[1], "setdate") == 0)
+				log_setdate(argc, argv);
+			else
+			if (strcmp(argv[1], "settime") == 0)
+				log_settime(argc, argv);
+			else
 			if (strcmp(argv[1], "logging") == 0)
 				log_logging(argc, argv);
 			else
 			{
-				println("Unrecognized sub-command '", argv[1], "'\n");
+				println("Unrecognized sub-command '", argv[1], "'.\n");
 				log_help(argc, argv);
 			}
 		}
@@ -131,7 +137,7 @@ namespace Varanus
 	void log_read(int argc, char* argv[])
 	{
 		if (argc <= 2)
-			println("Error: no argument specified");
+			println("Error: no argument specified.");
 		else
 		if (strcmp(argv[2], "all") == 0)
 		{
@@ -145,7 +151,7 @@ namespace Varanus
 		else
 		{
 			size_t n;
-			bool result = sscanf(argv[2], "%i", &n) == 1;
+			bool result = sscanf(argv[2], "%u", &n) == 1;
 			n = max(0, min(log.length(), n));
 
 			if (result)
@@ -164,7 +170,7 @@ namespace Varanus
 	void log_delete(int argc, char* argv[])
 	{
 		if (argc <= 2)
-			println("Error: no argument specified");
+			println("Error: no argument specified.");
 		else
 		if (strcmp(argv[2], "all") == 0)
 		{
@@ -174,7 +180,7 @@ namespace Varanus
 		else
 		{
 			size_t n;
-			bool result = sscanf(argv[2], "%i", &n) == 1;
+			bool result = sscanf(argv[2], "%u", &n) == 1;
 			n = max(0, min(log.length(), n));
 
 			if (result)
@@ -186,11 +192,97 @@ namespace Varanus
 		}
 	}
 
+	// Set the system date
+	void log_setdate(int argc, char* argv[])
+	{
+		if (argc != 5)
+			println("Error: Incorrect number of arguments.");
+		else
+		{
+			bool result = true;
+
+			int day, month, year;
+			result &= sscanf(argv[2], "%u", &day) == 1;
+			result &= sscanf(argv[3], "%u", &month) == 1;
+			result &= sscanf(argv[4], "%u", &year) == 1;
+
+			if (!result)
+				println("Error: Invalid argument(s).");
+			else
+			{
+				time_t ctime = time(nullptr);
+				tm* timeval;
+				timeval = localtime(&ctime);
+
+				// Update the date values
+				timeval->tm_mday = day;
+				timeval->tm_mon  = month;
+				timeval->tm_year = year - 1900;
+
+				// Set the time to the new value
+				set_time(mktime(timeval));
+			}
+		}
+	}
+
+	// Set the system time
+	void log_settime(int argc, char* argv[])
+	{
+		if (argc != 5)
+			println("Error: Incorrect number of arguments.");
+		else
+		{
+			bool result = true;
+
+			int hour, min, sec;
+			result &= sscanf(argv[2], "%u", &hour) == 1;
+			result &= sscanf(argv[3], "%u", &min) == 1;
+			result &= sscanf(argv[4], "%u", &sec) == 1;
+
+			if (!result)
+				println("Error: Invalid argument(s).");
+			else
+			{
+				time_t ctime = time(nullptr);
+				tm* timeval;
+				timeval = localtime(&ctime);
+
+				// Update the time values
+				timeval->tm_hour = hour;
+				timeval->tm_min  = min;
+				timeval->tm_sec  = sec;
+
+				// Set the time to the new value
+				set_time(mktime(timeval));
+			}
+		}
+	}
+
+	// Set the sample rate
+	void log_sett(int argc, char* argv[])
+	{
+		if (argc <= 2)
+			println("Error: no argument specified.");
+		else
+		{
+			float rate;
+			bool result = sscanf(argv[2], "%f", &rate) == 1;
+
+			if (result)
+			{
+				state.setSampleRate(rate);
+				println("Sample rate set to ", rate, '.');
+			}
+			else
+				println("Error: unrecognized argument '", argv[2], '\'');
+		}
+	}
+
 	// Toggle logging
 	void log_logging(int argc, char* argv[])
 	{
 		if (argc <= 2)
-			println("Error: no argument specified");
+			println("Error: no argument specified.");
 		else
 		if (strcmp(argv[2], "1") == 0 || strcmp(argv[2], "on") == 0)
 		{

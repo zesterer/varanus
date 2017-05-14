@@ -1,2 +1,2 @@
 Fill.text,Fill.data,Fill.bss,Misc.text,Misc.data,Misc.bss,drivers.text,drivers.data,drivers.bss,features/filesystem.text,features/filesystem.data,features/filesystem.bss,features/netsocket.text,features/netsocket.data,features/netsocket.bss,hal.text,hal.data,hal.bss,platform.text,platform.data,platform.bss,rtos.text,rtos.data,rtos.bss,rtos/rtx.text,rtos/rtx.data,rtos/rtx.bss,targets/TARGET_STM.text,targets/TARGET_STM.data,targets/TARGET_STM.bss,static_ram,heap,stack,total_ram,total_flash
-150,0,12,41858,2496,4681,2012,4,132,627,0,0,22,0,0,406,0,8,1955,4,297,773,4,4,6585,20,6870,5867,4,700,15236,unknown,unknown,15236,62787
+203,7,10,63689,2573,4723,2781,4,164,627,0,0,22,0,0,450,0,8,2107,20,325,773,4,4,6613,20,6870,13666,4,1288,16024,unknown,unknown,16024,93563

@@ -26,10 +26,17 @@
 
 // Mbed
 #include <mbed.h>
+#include <x_nucleo_iks01a1.h>
 
 namespace Varanus
 {
+	// Indicator LED
 	static DigitalOut led1(LED1);
+
+	// Environmental expansion board
+	static X_NUCLEO_IKS01A1* exp_board = X_NUCLEO_IKS01A1::Instance(D14, D15);
+
+	// Sensors
 
 	// sensor_main() : The main sensor thread
 	void sensor_main()

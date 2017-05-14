@@ -34,7 +34,10 @@ namespace Varanus
 	void __shell_readline(char* buff, size_t size);
 	int __shell_split_args(char* cmd, char** buff, size_t size);
 
-	// Shell utilities
+	// Shell utilities - templating some of these functions provides a zero-cost
+	// abstraction that the compiler will completely optimise out of the final
+	// executable. The advantage is that it provides some level of compile-time
+	// prevention of buffer overflows and protects against lazy programming
 	template <size_t SIZE> void shell_readline(char(&buff)[SIZE]) { __shell_readline(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
 	template <size_t SIZE> int shell_split_args(char* cmd, char*(&buff)[SIZE]) { return __shell_split_args(cmd, buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
 
@@ -45,6 +48,7 @@ namespace Varanus
 	// Shell commands
 	void shell_motd(int argc, char* argv[]);
 	void shell_help(int argc, char* argv[]);
+	void shell_time(int argc, char* argv[]);
 }
 
 #endif

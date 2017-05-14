@@ -113,7 +113,7 @@ namespace Varanus
 
 	// Long long formatter
 	template <typename T>
-	void __fmt_arg(T& ostream, long long i, int base = 10, int pad = 0)
+	void __fmt_arg(T& ostream, long long i)
 	{
 		char buff[sizeof(long long) * 8 + 4];
 		snprintf(buff, sizeof(buff), "%lli", i);
@@ -122,10 +122,19 @@ namespace Varanus
 
 	// Unsigned long long formatter
 	template <typename T>
-	void __fmt_arg(T& ostream, unsigned long long i, int base = 10, int pad = 0)
+	void __fmt_arg(T& ostream, unsigned long long i)
 	{
 		char buff[sizeof(unsigned long long) * 8 + 4];
 		snprintf(buff, sizeof(buff), "%llu", i);
+		__fmt_arg(ostream, buff);
+	}
+
+	// Float formatter
+	template <typename T>
+	void __fmt_arg(T& ostream, float i)
+	{
+		char buff[32];
+		snprintf(buff, sizeof(buff), "%f", i);
 		__fmt_arg(ostream, buff);
 	}
 

@@ -74,6 +74,9 @@ namespace Varanus
 			if (strcmp(argv[0], "log") == 0)
 				log_cmd(argc, argv);
 			else
+			if (strcmp(argv[0], "time") == 0)
+				shell_time(argc, argv);
+			else
 				println("Unknown command '", argv[0], '\'');
 		}
 	}
@@ -141,6 +144,7 @@ namespace Varanus
 			"    help - Display this help screen\n",
 			"    motd - Display the MOTD\n",
 			"    log  - Execute a logging command\n",
+			"    time - Display the system time\n",
 			"    halt - Safely power down the device\n"
 		);
 	}
@@ -149,5 +153,19 @@ namespace Varanus
 	void shell_motd(int argc, char* argv[])
 	{
 		println("\rWelcome to Varanus ", 0, '.', 1, '.', 0, '\n');
+	}
+
+	// shell_time() : Show the system time
+	void shell_time(int argc, char* argv[])
+	{
+		time_t ctime = time(nullptr);
+		tm* timeval;
+		timeval = localtime(&ctime);
+
+		println(
+			"The time is ",
+			timeval->tm_year + 1900, '-', timeval->tm_mon, '-', timeval->tm_mday,
+			' ', timeval->tm_hour, ':', timeval->tm_min, ':', timeval->tm_sec
+		);
 	}
 }
