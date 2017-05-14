@@ -23,6 +23,7 @@
 // Varanus
 #include <varanus/shell.hpp>
 #include <varanus/out.hpp>
+#include <varanus/log.hpp>
 
 namespace Varanus
 {
@@ -61,6 +62,9 @@ namespace Varanus
 			else
 			if (strcmp(argv[0], "motd") == 0)
 				shell_motd(argc, argv);
+			else
+			if (strcmp(argv[0], "log") == 0)
+				log_cmd(argc, argv);
 			else
 				println("Unknown command '", argv[0], '\'');
 		}
@@ -126,8 +130,10 @@ namespace Varanus
 	{
 		print(
 			"Available commands:\n",
-			"    help - Display this help\n",
-			"    motd - Display the MOTD\n"
+			"    help - Display this help screen\n",
+			"    motd - Display the MOTD\n",
+			"    log  - Execute a logging command\n",
+			"    halt - Safely power down the device\n"
 		);
 	}
 

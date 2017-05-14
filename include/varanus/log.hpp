@@ -54,9 +54,20 @@ namespace Varanus
 		}
 
 		// Find the maximum volume of the queue
-		size_t volume()
+		size_t volume() const
 		{
 			return MAXENTRIES;
+		}
+
+		// Clear all entries from the queue
+		void clear()
+		{
+			this->gate.lock(); // Start critical section
+
+			this->next = 0;
+			this->last = 0;
+
+			this->gate.unlock(); // End critical section
 		}
 
 		// Return a specific entry by index in the queue
@@ -113,6 +124,13 @@ namespace Varanus
 			return entry;
 		}
 	};
+
+	// Interpret a log commands
+	void log_cmd(int argc, char* argv[]);
+
+	// Log commands
+	void log_help(int argc, char* argv[]);
+	void log_read(int argc, char* argv[]);
 }
 
 #endif

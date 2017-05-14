@@ -21,7 +21,7 @@
 */
 
 // Varanus
-#include <varanus/shell.hpp>
+#include <varanus/com.hpp>
 #include <varanus/out.hpp>
 
 // Mbed
@@ -37,9 +37,18 @@ namespace Varanus
 		while (true)
 		{
 			led1 = 1;
-			wait(0.1);
-			led1 = 0;
 			wait(0.5);
+			led1 = 0;
+			wait(2.5);
+
+			Data entry;
+
+			entry.setTime(0);
+			entry.setTemp(0);
+			entry.setPress(0);
+			entry.setHumid(0);
+
+			log.push(entry);
 		}
 	}
 }

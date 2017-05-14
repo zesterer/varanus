@@ -30,16 +30,32 @@ namespace Varanus
 	class Data
 	{
 	private:
-		float value;
+		uint32_t time;
+		float    temp;
+		float    press;
+		float    humid;
 
 	public:
 		Data();
 
 		// Not for standard use
 		void __toString(char* buff, size_t size) const;
-
+		void __toCSV(char* buff, size_t size) const;
 
 		template <size_t SIZE> void toString(char(&buff)[SIZE]) const { this->__toString(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
+		template <size_t SIZE> void toCSV(char(&buff)[SIZE]) const { this->__toCSV(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
+
+		// Getters
+		uint32_t getTime()  const { return this->time; }
+		float    getTemp()  const { return this->temp; }
+		float    getPress() const { return this->press; }
+		float    getHumid() const { return this->humid; }
+
+		// Setters
+		void setTime(uint32_t time) { this->time = time; }
+		void setTemp(float temp)    { this->temp = temp; }
+		void setPress(float press)  { this->press = press; }
+		void setHumid(float humid)  { this->humid = humid; }
 	};
 }
 
