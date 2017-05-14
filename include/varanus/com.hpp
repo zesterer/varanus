@@ -21,10 +21,22 @@
 *
 */
 
+#ifndef VARANUS_COM_HPP
+#define VARANUS_COM_HPP
+
 // Mbed
 #include <mbed.h>
 
 namespace Varanus
 {
+	// The program state
+	struct State
+	{
+
+	};
+
 	extern Serial tty;
+	extern State state;
 }
+
+#endif

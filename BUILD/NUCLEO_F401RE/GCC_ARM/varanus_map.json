@@ -4,15 +4,15 @@
         "size": {
             ".data": 0, 
             ".bss": 12, 
-            ".text": 124
+            ".text": 141
         }
     }, 
     {
         "module": "Misc", 
         "size": {
             ".data": 2492, 
-            ".bss": 313, 
-            ".text": 38105
+            ".bss": 401, 
+            ".text": 38446
         }
     }, 
     {
@@ -32,6 +32,14 @@
         }
     }, 
     {
+        "module": "features/netsocket", 
+        "size": {
+            ".data": 0, 
+            ".bss": 0, 
+            ".text": 22
+        }
+    }, 
+    {
         "module": "hal", 
         "size": {
             ".data": 0, 
@@ -44,7 +52,7 @@
         "size": {
             ".data": 4, 
             ".bss": 297, 
-            ".text": 1872
+            ".text": 1927
         }
     }, 
     {
@@ -52,7 +60,7 @@
         "size": {
             ".data": 4, 
             ".bss": 4, 
-            ".text": 149
+            ".text": 773
         }
     }, 
     {
@@ -60,7 +68,7 @@
         "size": {
             ".data": 20, 
             ".bss": 6870, 
-            ".text": 6073
+            ".text": 6585
         }
     }, 
     {
@@ -73,11 +81,11 @@
     }, 
     {
         "summary": {
-            "total_flash": 57729, 
-            "static_ram": 10864, 
+            "total_flash": 59300, 
+            "static_ram": 10952, 
             "stack": 0, 
             "heap": 0, 
-            "total_ram": 10864
+            "total_ram": 10952
         }
     }
 ]

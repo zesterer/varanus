@@ -21,6 +21,9 @@
 *
 */
 
+#ifndef VARANUS_OUT_HPP
+#define VARANUS_OUT_HPP
+
 // Varanus
 #include <varanus/com.hpp>
 #include <varanus/fmt.hpp>
@@ -34,6 +37,8 @@ namespace Varanus
 			tty.putc(c);
 			if (c == '\n')
 				tty.putc('\r');
+			else if (c == '\r')
+				tty.putc('\n');
 		}
 	};
 
@@ -60,3 +65,5 @@ namespace Varanus
 		__print_ostream::write('\n');
 	}
 }
+
+#endif

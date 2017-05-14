@@ -27,6 +27,9 @@
 *
 */
 
+#ifndef VARANUS_FMT_HPP
+#define VARANUS_FMT_HPP
+
 // Mbed
 #include <mbed.h>
 
@@ -160,3 +163,5 @@ namespace Varanus
 		__pass_funct{(__fmt_arg(ostream, args), 1)...};
 	}
 }
+
+#endif

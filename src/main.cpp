@@ -18,18 +18,29 @@
 */
 
 // Varanus
+#include <varanus/com.hpp>
 #include <varanus/shell.hpp>
 
 // Mbed
 #include <mbed.h>
+#include <rtos.h>
 
 namespace Varanus
 {
-	// USB serial connection
+	// USB serial TTY
 	Serial tty(USBTX, USBRX);
+
+	// Program state
+	State state;
+
+	// Threads
+	Thread shell_thread;
 
 	extern "C" int main()
 	{
-		return shell_main();
+		// Start threads
+		shell_thread.start(shell_main);
+
+		return 0;
 	}
 }

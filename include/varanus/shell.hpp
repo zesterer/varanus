@@ -21,6 +21,9 @@
 *
 */
 
+#ifndef VARANUS_SHELL_HPP
+#define VARANUS_SHELL_HPP
+
 // Mbed
 #include <mbed.h>
 
@@ -28,9 +31,19 @@ namespace Varanus
 {
 	// Not for standard use
 	void __shell_readline(char* buff, size_t size);
+	int __shell_split_args(char* cmd, char** buff, size_t size);
+
+	// Shell utilities
+	template <size_t SIZE> void shell_readline(char(&buff)[SIZE]) { __shell_readline(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
+	template <size_t SIZE> int shell_split_args(char* cmd, char*(&buff)[SIZE]) { return __shell_split_args(cmd, buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
 
 	// Shell functions
-	void shell_motd();
-	int  shell_main();
-	template <size_t SIZE> void shell_readline(char(&buff)[SIZE]) { __shell_readline(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
+	void shell_main();
+	void shell_cmd(int argc, char* argv[]);
+
+	// Shell commands
+	void shell_motd(int argc, char* argv[]);
+	void shell_help(int argc, char* argv[]);
 }
+
+#endif
