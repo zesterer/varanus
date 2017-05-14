@@ -30,12 +30,20 @@ namespace Varanus
 	// shell_main() : The main shell thread
 	void shell_main()
 	{
-		// Shell initiation
-		shell_motd(0, nullptr);
-		println("Type 'help' for more information");
+		// Only display MOTD and info if live-logging is disabled
+		if (!state.getLiveLogging())
+		{
+			// Shell initiation
+			shell_motd(0, nullptr);
+			println("Type 'help' for more information");
+		}
 
 		while (1)
 		{
+			// Live-log if necessary
+			if (state.getLiveLogging())
+				log_live();
+
 			// Display the prompt
 			print("$ ");
 

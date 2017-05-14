@@ -39,6 +39,7 @@ namespace Varanus
 		// Track the next (next to be added) and last entry indexes
 		size_t next = 0;
 		size_t last = 0;
+		size_t gcount = 0;
 		T entries[MAXENTRIES];
 		Mutex gate;
 
@@ -57,6 +58,16 @@ namespace Varanus
 		size_t volume() const
 		{
 			return MAXENTRIES;
+		}
+
+		// Find the number of entries ever added
+		size_t count()
+		{
+			this->gate.lock(); // Start critical section
+			size_t count = this->gcount;
+			this->gate.unlock(); // End critical section
+
+			return count;
 		}
 
 		// Clear all entries from the queue
@@ -100,6 +111,8 @@ namespace Varanus
 			// Copy the new value into the next entry index position
 			this->entries[this->next] = entry;
 
+			this->gcount ++;
+
 			this->gate.unlock(); // End critical section
 
 			return overflow;
@@ -107,7 +120,7 @@ namespace Varanus
 
 		// Remove an entry from the end of the queue. T must have a default
 		// constructor
-		T pop(size_t index)
+		T pop()
 		{
 			this->gate.lock(); // Start critical section
 
@@ -127,10 +140,15 @@ namespace Varanus
 
 	// Interpret a log commands
 	void log_cmd(int argc, char* argv[]);
+	void log_live();
 
 	// Log commands
 	void log_help(int argc, char* argv[]);
+	void log_count(int argc, char* argv[]);
+	void log_status(int argc, char* argv[]);
 	void log_read(int argc, char* argv[]);
+	void log_delete(int argc, char* argv[]);
+	void log_logging(int argc, char* argv[]);
 }
 
 #endif

@@ -40,12 +40,53 @@ namespace Varanus
 			if (strcmp(argv[1], "help") == 0)
 				log_help(argc, argv);
 			else
+			if (strcmp(argv[1], "count") == 0)
+				log_count(argc, argv);
+			else
+			if (strcmp(argv[1], "status") == 0)
+				log_status(argc, argv);
+			else
 			if (strcmp(argv[1], "read") == 0)
 				log_read(argc, argv);
+			else
+			if (strcmp(argv[1], "delete") == 0)
+				log_delete(argc, argv);
+			else
+			if (strcmp(argv[1], "logging") == 0)
+				log_logging(argc, argv);
 			else
 			{
 				println("Unrecognized sub-command '", argv[1], "'\n");
 				log_help(argc, argv);
+			}
+		}
+	}
+
+	// Log incoming data live
+	void log_live()
+	{
+		// Count total entries ever logged
+		size_t log_count = log.count();
+		while (true)
+		{
+			// Wait for half the sample rate or 1 second (to prevent sample misses)
+			float wait_time = min(state.getSampleRate() / 2.0f, 1.0f);
+			wait(wait_time);
+
+			size_t ncount = log.count();
+			if (ncount != log_count) // Display the current entry
+			{
+				char buff[128];
+				log.get(log.length() - 1).toString(buff);
+				println(buff);
+			}
+			log_count = ncount;
+
+			// If a character is sent, exit the live log
+			if (tty.readable())
+			{
+				tty.getc();
+				break;
 			}
 		}
 	}
@@ -72,6 +113,20 @@ namespace Varanus
 		);
 	}
 
+	// Find the number of log entries in memory
+	void log_count(int argc, char* argv[])
+	{
+		println("The log currently contains ", log.length(), " entries.");
+	}
+
+	// Display the most recent log status
+	void log_status(int argc, char* argv[])
+	{
+		char buff[128];
+		log.get(log.length() - 1).toString(buff);
+		println(buff);
+	}
+
 	// Read logs command
 	void log_read(int argc, char* argv[])
 	{
@@ -89,8 +144,9 @@ namespace Varanus
 		}
 		else
 		{
-			int n;
+			size_t n;
 			bool result = sscanf(argv[2], "%i", &n) == 1;
+			n = max(0, min(log.length(), n));
 
 			if (result)
 			{
@@ -102,5 +158,52 @@ namespace Varanus
 				}
 			}
 		}
+	}
+
+	// Delete logs command
+	void log_delete(int argc, char* argv[])
+	{
+		if (argc <= 2)
+			println("Error: no argument specified");
+		else
+		if (strcmp(argv[2], "all") == 0)
+		{
+			println(log.length(), " log entries deleted.");
+			log.clear();
+		}
+		else
+		{
+			size_t n;
+			bool result = sscanf(argv[2], "%i", &n) == 1;
+			n = max(0, min(log.length(), n));
+
+			if (result)
+			{
+				for (size_t i = 0; i < n; i ++)
+					log.pop();
+				println(n, " log entries deleted.");
+			}
+		}
+	}
+
+	// Toggle logging
+	void log_logging(int argc, char* argv[])
+	{
+		if (argc <= 2)
+			println("Error: no argument specified");
+		else
+		if (strcmp(argv[2], "1") == 0 || strcmp(argv[2], "on") == 0)
+		{
+			state.setLiveLogging(true);
+			println("Live logging enabled, press any key to return to shell.");
+		}
+		else
+		if (strcmp(argv[2], "0") == 0 || strcmp(argv[2], "off") == 0)
+		{
+			state.setLiveLogging(false);
+			println("Live logging disable.");
+		}
+		else
+			println("Error: unrecognized argument '", argv[2], '\'');
 	}
 }

@@ -37,9 +37,9 @@ namespace Varanus
 		while (true)
 		{
 			led1 = 1;
-			wait(0.5);
+			wait(0.2);
 			led1 = 0;
-			wait(2.5);
+			wait(0.8);
 
 			Data entry;
 

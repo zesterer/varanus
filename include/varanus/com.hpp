@@ -38,12 +38,47 @@ namespace Varanus
 	// The program state
 	struct State
 	{
-		// Nothing yet
+		float sampleRate = 1.0f;
+		bool liveLogging = false;
+		Mutex gate;
+
+		float getSampleRate()
+		{
+			this->gate.lock(); // Begin critical section
+			float sampleRate = this->sampleRate;
+			this->gate.unlock(); // End critical section
+			return sampleRate;
+		}
+
+		bool getLiveLogging()
+		{
+			this->gate.lock(); // Begin critical section
+			float liveLogging = this->liveLogging;
+			this->gate.unlock(); // End critical section
+			return liveLogging;
+		}
+
+		void setSampleRate(float sampleRate)
+		{
+			this->gate.lock(); // Begin critical section
+			this->sampleRate = sampleRate;
+			this->gate.unlock(); // End critical section
+		}
+
+		void setLiveLogging(float liveLogging)
+		{
+			this->gate.lock(); // Begin critical section
+			this->liveLogging = liveLogging;
+			this->gate.unlock(); // End critical section
+		}
 	};
 
 	extern Serial tty;
 	extern State state;
 	extern Log<Data, 256> log;
+
+	template <typename T, typename U> T max(T a, U b) { return (a > b) ? a : b; }
+	template <typename T, typename U> T min(T a, U b) { return (a > b) ? b : a; }
 }
 
 #endif
