@@ -1,7 +1,5 @@
 /*
-* 	file : com.hpp
-*
-* 	Copyright 2017 Joshua Barretto
+* 	file : sensor.cpp
 *
 * 	This file is part of Varanus.
 *
@@ -18,32 +16,30 @@
 * 	You should have received a copy of the GNU General Public License along with
 * 	Varanus.  If not, see <http://www.gnu.org/licenses/>.
 *
-* 	com.hpp : This file contains common utility function and object definitions
-* 	          for Varanus.
-*
+* 	sensor.cpp : This file contains code for the sensor system's thread as per
+* 	            declarations and definitions in <include/varanus/sensor.hpp>.
 */
 
-#ifndef VARANUS_COM_HPP
-#define VARANUS_COM_HPP
-
 // Varanus
-#include <varanus/log.hpp>
-#include <varanus/data.hpp>
+#include <varanus/shell.hpp>
+#include <varanus/out.hpp>
 
 // Mbed
 #include <mbed.h>
 
 namespace Varanus
 {
-	// The program state
-	struct State
+	static DigitalOut led1(LED1);
+
+	// sensor_main() : The main sensor thread
+	void sensor_main()
 	{
-		// Nothing yet
-	};
-
-	extern Serial tty;
-	extern State state;
-	extern Log<Data, 256> log;
+		while (true)
+		{
+			led1 = 1;
+			wait(0.1);
+			led1 = 0;
+			wait(0.5);
+		}
+	}
 }
-
-#endif

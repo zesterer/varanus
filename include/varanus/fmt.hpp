@@ -1,20 +1,22 @@
 /*
 * 	file : fmt.hpp
 *
+* 	Copyright 2017 Joshua Barretto
+*
 * 	This file is part of Varanus.
 *
-* 	Varanus is free software: you can redistribute it and/or modify
-* 	it under the terms of the GNU General Public License as published by
-* 	the Free Software Foundation, either version 3 of the License, or
-* 	(at your option) any later version.
+* 	Varanus is free software: you can redistribute it and/or modify it under the
+* 	terms of the GNU General Public License as published by the Free Software
+* 	Foundation, either version 3 of the License, or (at your option) any later
+* 	version.
 *
-* 	Varanus is distributed in the hope that it will be useful,
-* 	but WITHOUT ANY WARRANTY; without even the implied warranty of
-* 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* 	GNU General Public License for more details.
+* 	Varanus is distributed in the hope that it will be useful, but WITHOUT ANY
+* 	WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+* 	FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+* 	details.
 *
-* 	You should have received a copy of the GNU General Public License
-* 	along with Varanus.  If not, see <http://www.gnu.org/licenses/>.
+* 	You should have received a copy of the GNU General Public License along with
+* 	Varanus.  If not, see <http://www.gnu.org/licenses/>.
 *
 * 	fmt.hpp : This file provides utility code for my custom-built type-inference
 * 	          print system. Please be aware that this code makes extremely heavy
@@ -24,7 +26,6 @@
 * 	          as I am aware - other than similar code in other projects I have
 * 	          developed - this is the first occurence of vardic templates used
 * 	          in this way ever.
-*
 */
 
 #ifndef VARANUS_FMT_HPP

@@ -1,11 +1,11 @@
 BUILD/NUCLEO_F401RE/GCC_ARM/src/main.o: src/main.cpp \
  BUILD/NUCLEO_F401RE/GCC_ARM/mbed_config.h include/varanus/com.hpp \
- mbed-os/mbed.h mbed-os/rtos/rtos.h mbed-os/rtos/Thread.h \
- mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h mbed-os/platform/Callback.h \
- mbed-os/platform/mbed_assert.h mbed-os/platform/mbed_preprocessor.h \
- mbed-os/platform/mbed_toolchain.h mbed-os/rtos/Semaphore.h \
- mbed-os/rtos/Mutex.h mbed-os/rtos/RtosTimer.h mbed-os/rtos/Mail.h \
- mbed-os/rtos/MemoryPool.h mbed-os/rtos/Queue.h \
+ include/varanus/log.hpp mbed-os/mbed.h mbed-os/rtos/rtos.h \
+ mbed-os/rtos/Thread.h mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h \
+ mbed-os/platform/Callback.h mbed-os/platform/mbed_assert.h \
+ mbed-os/platform/mbed_preprocessor.h mbed-os/platform/mbed_toolchain.h \
+ mbed-os/rtos/Semaphore.h mbed-os/rtos/Mutex.h mbed-os/rtos/RtosTimer.h \
+ mbed-os/rtos/Mail.h mbed-os/rtos/MemoryPool.h mbed-os/rtos/Queue.h \
  mbed-os/platform/mbed_error.h mbed-os/features/netsocket/nsapi.h \
  mbed-os/features/netsocket/nsapi_types.h \
  mbed-os/features/netsocket/SocketAddress.h \
@@ -151,5 +151,6 @@ BUILD/NUCLEO_F401RE/GCC_ARM/src/main.o: src/main.cpp \
  mbed-os/platform/mbed_wait_api.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_sleep.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_rtc_time.h mbed-os/platform/Callback.h \
- mbed-os/platform/FunctionPointer.h include/varanus/shell.hpp \
- mbed-os/rtos/rtos.h
+ mbed-os/platform/FunctionPointer.h mbed-os/rtos/rtos.h \
+ include/varanus/data.hpp include/varanus/shell.hpp \
+ include/varanus/sensor.hpp

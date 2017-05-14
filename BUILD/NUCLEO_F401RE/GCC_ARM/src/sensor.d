@@ -1,4 +1,4 @@
-BUILD/NUCLEO_F401RE/GCC_ARM/src/shell.o: src/shell.cpp \
+BUILD/NUCLEO_F401RE/GCC_ARM/src/sensor.o: src/sensor.cpp \
  BUILD/NUCLEO_F401RE/GCC_ARM/mbed_config.h include/varanus/shell.hpp \
  mbed-os/mbed.h mbed-os/rtos/rtos.h mbed-os/rtos/Thread.h \
  mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h mbed-os/platform/Callback.h \

@@ -1,5 +1,5 @@
 /*
-* 	file : com.hpp
+* 	file : data.hpp
 *
 * 	Copyright 2017 Joshua Barretto
 *
@@ -18,32 +18,29 @@
 * 	You should have received a copy of the GNU General Public License along with
 * 	Varanus.  If not, see <http://www.gnu.org/licenses/>.
 *
-* 	com.hpp : This file contains common utility function and object definitions
-* 	          for Varanus.
-*
+* 	data.hpp : This file contains the data structure representing environmental
+* 	           log entries
 */
 
-#ifndef VARANUS_COM_HPP
-#define VARANUS_COM_HPP
-
-// Varanus
-#include <varanus/log.hpp>
-#include <varanus/data.hpp>
-
-// Mbed
-#include <mbed.h>
+#ifndef VARANUS_DATA_HPP
+#define VARANUS_DATA_HPP
 
 namespace Varanus
 {
-	// The program state
-	struct State
+	class Data
 	{
-		// Nothing yet
-	};
+	private:
+		float value;
 
-	extern Serial tty;
-	extern State state;
-	extern Log<Data, 256> log;
+	public:
+		Data();
+
+		// Not for standard use
+		void __toString(char* buff, size_t size) const;
+
+
+		template <size_t SIZE> void toString(char(&buff)[SIZE]) const { this->__toString(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
+	};
 }
 
 #endif

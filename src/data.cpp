@@ -1,7 +1,5 @@
 /*
-* 	file : com.hpp
-*
-* 	Copyright 2017 Joshua Barretto
+* 	file : data.cpp
 *
 * 	This file is part of Varanus.
 *
@@ -18,32 +16,23 @@
 * 	You should have received a copy of the GNU General Public License along with
 * 	Varanus.  If not, see <http://www.gnu.org/licenses/>.
 *
-* 	com.hpp : This file contains common utility function and object definitions
-* 	          for Varanus.
-*
+* 	data.cpp : This file contains code for the environmental monitor data entry
+* 	           as per declarations & definitions in <include/varanus/data.hpp>.
 */
 
-#ifndef VARANUS_COM_HPP
-#define VARANUS_COM_HPP
-
 // Varanus
-#include <varanus/log.hpp>
-#include <varanus/data.hpp>
-
-// Mbed
-#include <mbed.h>
+#include <varanus/shell.hpp>
+#include <varanus/out.hpp>
 
 namespace Varanus
 {
-	// The program state
-	struct State
+	Data::Data()
 	{
-		// Nothing yet
-	};
+		this->value = 0.0f;
+	}
 
-	extern Serial tty;
-	extern State state;
-	extern Log<Data, 256> log;
+	void Data::__toString(char* buff, size_t size) const
+	{
+		snprintf(buff, size, "%f", this->value);
+	}
 }
-
-#endif

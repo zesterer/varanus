@@ -1,5 +1,5 @@
 /*
-* 	file : com.hpp
+* 	file : sensor.hpp
 *
 * 	Copyright 2017 Joshua Barretto
 *
@@ -18,32 +18,16 @@
 * 	You should have received a copy of the GNU General Public License along with
 * 	Varanus.  If not, see <http://www.gnu.org/licenses/>.
 *
-* 	com.hpp : This file contains common utility function and object definitions
-* 	          for Varanus.
-*
+* 	sensor.hpp : This file contains the main sensor thread function and code
+* 	           associated with reading the environmental sensor board.
 */
 
-#ifndef VARANUS_COM_HPP
-#define VARANUS_COM_HPP
-
-// Varanus
-#include <varanus/log.hpp>
-#include <varanus/data.hpp>
-
-// Mbed
-#include <mbed.h>
+#ifndef VARANUS_SENSOR_HPP
+#define VARANUS_SENSOR_HPP
 
 namespace Varanus
 {
-	// The program state
-	struct State
-	{
-		// Nothing yet
-	};
-
-	extern Serial tty;
-	extern State state;
-	extern Log<Data, 256> log;
+	void sensor_main();
 }
 
 #endif
