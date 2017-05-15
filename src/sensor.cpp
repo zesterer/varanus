@@ -95,7 +95,7 @@ namespace Varanus
 		// Initiate the sampling ticker
 		sampleTicker.attach(sensor_tick, sampleRate);
 
-		while (state.getHalted())
+		while (!state.getHalted())
 		{
 			// Wait for a sampling interrupt to occur
 			sampleSem.wait();
@@ -157,7 +157,7 @@ namespace Varanus
 		void sensor_simulate()
 		{
 			// Update simulated metrics
-			sim_temp += (rand() % 100 - 50) * 0.01f;
+			sim_temp  += (rand() % 100 - 50) * 0.01f;
 			sim_press += (rand() % 100 - 50) * 0.1f;
 			sim_humid += (rand() % 100 - 50) * 0.01f;
 		}

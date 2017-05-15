@@ -38,7 +38,7 @@ namespace Varanus
 			println("Type 'help' for more information");
 		}
 
-		while (1)
+		while (!state.getHalted())
 		{
 			// Live-log if necessary
 			if (state.getLiveLogging())
@@ -88,6 +88,9 @@ namespace Varanus
 			else
 			if (strcmp(argv[0], "time") == 0)
 				shell_time(argc, argv);
+			else
+			if (strcmp(argv[0], "halt") == 0)
+				shell_halt(argc, argv);
 			else
 				println("Unknown command '", argv[0], '\'');
 		}
@@ -179,5 +182,12 @@ namespace Varanus
 			timeval->tm_year + 1900, '-', timeval->tm_mon, '-', timeval->tm_mday,
 			' ', timeval->tm_hour, ':', timeval->tm_min, ':', timeval->tm_sec
 		);
+	}
+
+	// shell_halt() : Halt the system
+	void shell_halt(int argc, char* argv[])
+	{
+		state.halt();
+		println("System halting...");
 	}
 }

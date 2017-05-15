@@ -49,6 +49,7 @@ namespace Varanus
 	void shell_motd(int argc, char* argv[]);
 	void shell_help(int argc, char* argv[]);
 	void shell_time(int argc, char* argv[]);
+	void shell_halt(int argc, char* argv[]);
 }
 
 #endif

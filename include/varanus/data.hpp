@@ -55,7 +55,7 @@ namespace Varanus
 		float  getHumid()    const { return this->humid; }
 
 		// Setters
-		void setDatetime(time_t time) { this->datetime = datetime; }
+		void setDatetime(time_t datetime) { this->datetime = datetime; }
 		void setTemp(float temp)      { this->temp = temp; }
 		void setPress(float press)    { this->press = press; }
 		void setHumid(float humid)    { this->humid = humid; }

@@ -41,9 +41,8 @@ namespace Varanus
 
 	void Data::__toCSV(char* buff, size_t size)
 	{
-		time_t ctime = time(&this->datetime);
 		tm* timeval;
-		timeval = localtime(&ctime);
+		timeval = localtime(&this->datetime);
 
 		snprintf(buff, size, "%u-%u-%u, %u:%u:%u, %f, %f, %f",
 			timeval->tm_year + 1900, timeval->tm_mon, timeval->tm_mday,
