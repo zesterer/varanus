@@ -58,6 +58,9 @@ namespace Varanus
 			if (strcmp(argv[1], "settime") == 0)
 				log_settime(argc, argv);
 			else
+			if (strcmp(argv[1], "state") == 0)
+				log_state(argc, argv);
+			else
 			if (strcmp(argv[1], "logging") == 0)
 				log_logging(argc, argv);
 			else
@@ -83,7 +86,7 @@ namespace Varanus
 			if (ncount != log_count) // Display the current entry
 			{
 				char buff[128];
-				log.get(log.length() - 1).toString(buff);
+				log.get(log.length() - 1).toCSV(buff);
 				println(buff);
 			}
 			log_count = ncount;
@@ -278,6 +281,27 @@ namespace Varanus
 		}
 	}
 
+	// Toggle logging state
+	void log_state(int argc, char* argv[])
+	{
+		if (argc <= 2)
+			println("Error: no argument specified.");
+		else
+		if (strcmp(argv[2], "1") == 0 || strcmp(argv[2], "on") == 0)
+		{
+			state.setLoggingState(true);
+			println("Logging enabled.");
+		}
+		else
+		if (strcmp(argv[2], "0") == 0 || strcmp(argv[2], "off") == 0)
+		{
+			state.setLoggingState(false);
+			println("Logging disabled.");
+		}
+		else
+			println("Error: unrecognized argument '", argv[2], '\'');
+	}
+
 	// Toggle logging
 	void log_logging(int argc, char* argv[])
 	{
@@ -293,7 +317,7 @@ namespace Varanus
 		if (strcmp(argv[2], "0") == 0 || strcmp(argv[2], "off") == 0)
 		{
 			state.setLiveLogging(false);
-			println("Live logging disable.");
+			println("Live logging disabled.");
 		}
 		else
 			println("Error: unrecognized argument '", argv[2], '\'');

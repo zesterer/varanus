@@ -28,19 +28,27 @@ namespace Varanus
 {
 	Data::Data()
 	{
-		this->time  = 0;
-		this->temp  = 0;
-		this->press = 0;
-		this->humid = 0;
+		this->datetime = 0;
+		this->temp     = 0;
+		this->press    = 0;
+		this->humid    = 0;
 	}
 
-	void Data::__toString(char* buff, size_t size) const
+	void Data::__toString(char* buff, size_t size)
 	{
-		snprintf(buff, size, "time = %u, temperature = %f, pressure = %f, humidity = %f", (unsigned int)this->time, this->temp, this->press, this->humid);
+		snprintf(buff, size, "time = %u, temperature = %f, pressure = %f, humidity = %f", (unsigned int)this->datetime, this->temp, this->press, this->humid);
 	}
 
-	void Data::__toCSV(char* buff, size_t size) const
+	void Data::__toCSV(char* buff, size_t size)
 	{
-		snprintf(buff, size, "%u, %f, %f, %f", (unsigned int)this->time, this->temp, this->press, this->humid);
+		time_t ctime = time(&this->datetime);
+		tm* timeval;
+		timeval = localtime(&ctime);
+
+		snprintf(buff, size, "%u-%u-%u, %u:%u:%u, %f, %f, %f",
+			timeval->tm_year + 1900, timeval->tm_mon, timeval->tm_mday,
+			timeval->tm_hour, timeval->tm_min, timeval->tm_sec,
+			this->temp, this->press, this->humid
+		);
 	}
 }

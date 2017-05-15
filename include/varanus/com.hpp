@@ -38,8 +38,9 @@ namespace Varanus
 	// The program state
 	struct State
 	{
-		float sampleRate = 1.0f;
-		bool liveLogging = false;
+		float sampleRate   = 1.0f;
+		bool  liveLogging  = false;
+		bool  loggingState = true;
 		Mutex gate;
 
 		float getSampleRate()
@@ -58,6 +59,14 @@ namespace Varanus
 			return liveLogging;
 		}
 
+		bool getLoggingState()
+		{
+			this->gate.lock(); // Begin critical section
+			float loggingState = this->loggingState;
+			this->gate.unlock(); // End critical section
+			return loggingState;
+		}
+
 		void setSampleRate(float sampleRate)
 		{
 			this->gate.lock(); // Begin critical section
@@ -69,6 +78,13 @@ namespace Varanus
 		{
 			this->gate.lock(); // Begin critical section
 			this->liveLogging = liveLogging;
+			this->gate.unlock(); // End critical section
+		}
+
+		void setLoggingState(float loggingState)
+		{
+			this->gate.lock(); // Begin critical section
+			this->loggingState = loggingState;
 			this->gate.unlock(); // End critical section
 		}
 	};

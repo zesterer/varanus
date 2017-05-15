@@ -25,37 +25,40 @@
 #ifndef VARANUS_DATA_HPP
 #define VARANUS_DATA_HPP
 
+// Mbed
+#include <mbed.h>
+
 namespace Varanus
 {
 	class Data
 	{
 	private:
-		uint32_t time;
-		float    temp;
-		float    press;
-		float    humid;
+		time_t datetime;
+		float  temp;
+		float  press;
+		float  humid;
 
 	public:
 		Data();
 
 		// Not for standard use
-		void __toString(char* buff, size_t size) const;
-		void __toCSV(char* buff, size_t size) const;
+		void __toString(char* buff, size_t size);
+		void __toCSV(char* buff, size_t size);
 
-		template <size_t SIZE> void toString(char(&buff)[SIZE]) const { this->__toString(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
-		template <size_t SIZE> void toCSV(char(&buff)[SIZE]) const { this->__toCSV(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
+		template <size_t SIZE> void toString(char(&buff)[SIZE]) { this->__toString(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
+		template <size_t SIZE> void toCSV(char(&buff)[SIZE]) { this->__toCSV(buff, SIZE); } // Templated to accept variable-size buffers. This prevents overflows
 
 		// Getters
-		uint32_t getTime()  const { return this->time; }
-		float    getTemp()  const { return this->temp; }
-		float    getPress() const { return this->press; }
-		float    getHumid() const { return this->humid; }
+		time_t getDatetime() const { return this->datetime; }
+		float  getTemp()     const { return this->temp; }
+		float  getPress()    const { return this->press; }
+		float  getHumid()    const { return this->humid; }
 
 		// Setters
-		void setTime(uint32_t time) { this->time = time; }
-		void setTemp(float temp)    { this->temp = temp; }
-		void setPress(float press)  { this->press = press; }
-		void setHumid(float humid)  { this->humid = humid; }
+		void setDatetime(time_t time) { this->datetime = datetime; }
+		void setTemp(float temp)      { this->temp = temp; }
+		void setPress(float press)    { this->press = press; }
+		void setHumid(float humid)    { this->humid = humid; }
 	};
 }
 

@@ -1,11 +1,12 @@
-BUILD/NUCLEO_F401RE/GCC_ARM/src/sensor.o: src/sensor.cpp \
- BUILD/NUCLEO_F401RE/GCC_ARM/mbed_config.h include/varanus/com.hpp \
- include/varanus/log.hpp mbed-os/mbed.h mbed-os/rtos/rtos.h \
- mbed-os/rtos/Thread.h mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h \
- mbed-os/platform/Callback.h mbed-os/platform/mbed_assert.h \
- mbed-os/platform/mbed_preprocessor.h mbed-os/platform/mbed_toolchain.h \
- mbed-os/rtos/Semaphore.h mbed-os/rtos/Mutex.h mbed-os/rtos/RtosTimer.h \
- mbed-os/rtos/Mail.h mbed-os/rtos/MemoryPool.h mbed-os/rtos/Queue.h \
+BUILD/NUCLEO_F401RE/GCC_ARM/X_NUCLEO_IKS01A1/x_nucleo_iks01a1.o: \
+ X_NUCLEO_IKS01A1/x_nucleo_iks01a1.cpp \
+ BUILD/NUCLEO_F401RE/GCC_ARM/mbed_config.h mbed-os/mbed.h \
+ mbed-os/rtos/rtos.h mbed-os/rtos/Thread.h \
+ mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h mbed-os/platform/Callback.h \
+ mbed-os/platform/mbed_assert.h mbed-os/platform/mbed_preprocessor.h \
+ mbed-os/platform/mbed_toolchain.h mbed-os/rtos/Semaphore.h \
+ mbed-os/rtos/Mutex.h mbed-os/rtos/RtosTimer.h mbed-os/rtos/Mail.h \
+ mbed-os/rtos/MemoryPool.h mbed-os/rtos/Queue.h \
  mbed-os/platform/mbed_error.h mbed-os/features/netsocket/nsapi.h \
  mbed-os/features/netsocket/nsapi_types.h \
  mbed-os/features/netsocket/SocketAddress.h \
@@ -151,6 +152,27 @@ BUILD/NUCLEO_F401RE/GCC_ARM/src/sensor.o: src/sensor.cpp \
  mbed-os/platform/mbed_wait_api.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_sleep.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_rtc_time.h mbed-os/platform/Callback.h \
- mbed-os/platform/FunctionPointer.h mbed-os/rtos/rtos.h \
- include/varanus/data.hpp include/varanus/out.hpp include/varanus/fmt.hpp \
- hts221/hts221.h include/LPS25H.h
+ mbed-os/platform/FunctionPointer.h X_NUCLEO_IKS01A1/x_nucleo_iks01a1.h \
+ X_NUCLEO_IKS01A1/x_nucleo_iks01a1_targets.h \
+ X_NUCLEO_IKS01A1/Components/hts221/hts221_class.h \
+ X_NUCLEO_IKS01A1/X_NUCLEO_COMMON/DevI2C/DevI2C.h mbed-os/hal/pinmap.h \
+ X_NUCLEO_IKS01A1/Components/hts221/hts221.h \
+ X_NUCLEO_IKS01A1/Components/Common/hum_temp.h \
+ X_NUCLEO_IKS01A1/ST_INTERFACES/Sensors/HumiditySensor.h \
+ X_NUCLEO_IKS01A1/ST_INTERFACES/Common/Component.h \
+ X_NUCLEO_IKS01A1/ST_INTERFACES/Sensors/TempSensor.h \
+ X_NUCLEO_IKS01A1/Components/lis3mdl/lis3mdl_class.h \
+ X_NUCLEO_IKS01A1/Components/lis3mdl/lis3mdl.h \
+ X_NUCLEO_IKS01A1/Components/Common/magneto.h \
+ X_NUCLEO_IKS01A1/ST_INTERFACES/Sensors/MagneticSensor.h \
+ X_NUCLEO_IKS01A1/Components/lps25h/lps25h_class.h \
+ X_NUCLEO_IKS01A1/Components/lps25h/lps25h.h \
+ X_NUCLEO_IKS01A1/Components/Common/pressure.h \
+ X_NUCLEO_IKS01A1/ST_INTERFACES/Sensors/PressureSensor.h \
+ X_NUCLEO_IKS01A1/Components/lsm6ds0/lsm6ds0_class.h \
+ X_NUCLEO_IKS01A1/Components/lsm6ds0/lsm6ds0.h \
+ X_NUCLEO_IKS01A1/Components/Common/imu_6axes.h \
+ X_NUCLEO_IKS01A1/ST_INTERFACES/Sensors/GyroSensor.h \
+ X_NUCLEO_IKS01A1/ST_INTERFACES/Sensors/MotionSensor.h \
+ X_NUCLEO_IKS01A1/Components/lsm6ds3/lsm6ds3_class.h \
+ X_NUCLEO_IKS01A1/Components/lsm6ds3/lsm6ds3.h

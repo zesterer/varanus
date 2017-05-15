@@ -25,9 +25,13 @@
 #ifndef VARANUS_SENSOR_HPP
 #define VARANUS_SENSOR_HPP
 
+// Varanus
+#include <varanus/data.hpp>
+
 namespace Varanus
 {
 	void sensor_main();
+	Data sensor_sample();
 }
 
 #endif

@@ -26,36 +26,105 @@
 
 // Mbed
 #include <mbed.h>
-#include <x_nucleo_iks01a1.h>
+
+// Environmental sensor board
+#include <hts221.h>
+#include <LPS25H.h>
+
+#define USE_SIMULATOR
 
 namespace Varanus
 {
 	// Indicator LED
 	static DigitalOut led1(LED1);
 
-	// Environmental expansion board
-	static X_NUCLEO_IKS01A1* exp_board = X_NUCLEO_IKS01A1::Instance(D14, D15);
+	// Environmental sensor board I2C
+	I2C i2c2(I2C_SDA, I2C_SCL);
+	LPS25H barometer(i2c2, LPS25H_V_CHIP_ADDR);
+	HTS221 humidity(I2C_SDA, I2C_SCL);
 
 	// Sensors
+
+	#ifdef USE_SIMULATOR
+		// Simulated metrics
+		float sim_temp  = 20.0f;
+		float sim_press = 100000.0f;
+		float sim_humid = 40.0f;
+
+		// Simulator update
+		void sensor_simulate();
+	#endif
 
 	// sensor_main() : The main sensor thread
 	void sensor_main()
 	{
+		humidity.init();
+		humidity.calib();
+
 		while (true)
 		{
-			led1 = 1;
-			wait(0.2);
-			led1 = 0;
-			wait(0.8);
+			// Time the code to syncronise sampling
+			Timer t;
+			t.start();
 
 			Data entry;
 
-			entry.setTime(0);
-			entry.setTemp(0);
-			entry.setPress(0);
-			entry.setHumid(0);
+			#ifdef USE_SIMULATOR
+				entry.setDatetime(time(nullptr));
+				entry.setTemp(sim_temp);
+				entry.setPress(sim_press);
+				entry.setHumid(sim_humid);
+			#else
+				entry = sensor_sample();
+			#endif
 
 			log.push(entry);
+
+			#ifdef USE_SIMULATOR
+				sensor_simulate();
+			#endif
+
+			// Blink the LED
+			led1 = 1;
+			Thread::wait(50); // 50 ms
+			led1 = 0;
+
+			// Find the sample rate
+			float sampleRate = state.getSampleRate();
+
+			// Stop execution timer
+			t.stop();
+
+			// Read the timer and wait for the sample rate, subtracting elapsed
+			Thread::wait(1000 * (sampleRate - t.read()));
 		}
 	}
+
+	Data sensor_sample()
+	{
+		Data entry;
+
+		float temp0, humi, temp1, pres;
+		humidity.ReadTempHumi(&temp0, &humi);
+		barometer.get();
+		temp1 = barometer.temperature();
+		pres = barometer.pressure();
+
+		entry.setDatetime(time(nullptr));
+		entry.setTemp(temp1);
+		entry.setPress(pres);
+		entry.setHumid(humi);
+
+		return entry;
+	}
+
+	#ifdef USE_SIMULATOR
+		void sensor_simulate()
+		{
+			// Update simulated metrics
+			sim_temp += (rand() % 100 - 50) * 0.01f;
+			sim_press += (rand() % 100 - 50) * 0.1f;
+			sim_humid += (rand() % 100 - 50) * 0.01f;
+		}
+	#endif
 }

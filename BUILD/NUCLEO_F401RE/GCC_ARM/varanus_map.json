@@ -2,17 +2,17 @@
     {
         "module": "Fill", 
         "size": {
-            ".data": 7, 
-            ".bss": 10, 
-            ".text": 203
+            ".data": 4, 
+            ".bss": 14, 
+            ".text": 150
         }
     }, 
     {
         "module": "Misc", 
         "size": {
-            ".data": 2573, 
-            ".bss": 4723, 
-            ".text": 63689
+            ".data": 2584, 
+            ".bss": 5199, 
+            ".text": 51047
         }
     }, 
     {
@@ -20,7 +20,7 @@
         "size": {
             ".data": 4, 
             ".bss": 164, 
-            ".text": 2781
+            ".text": 2730
         }
     }, 
     {
@@ -44,7 +44,7 @@
         "size": {
             ".data": 0, 
             ".bss": 8, 
-            ".text": 450
+            ".text": 420
         }
     }, 
     {
@@ -75,17 +75,17 @@
         "module": "targets/TARGET_STM", 
         "size": {
             ".data": 4, 
-            ".bss": 1288, 
-            ".text": 13666
+            ".bss": 752, 
+            ".text": 12747
         }
     }, 
     {
         "summary": {
-            "total_flash": 93563, 
-            "static_ram": 16024, 
+            "total_flash": 79876, 
+            "static_ram": 15976, 
             "stack": 0, 
             "heap": 0, 
-            "total_ram": 16024
+            "total_ram": 15976
         }
     }
 ]

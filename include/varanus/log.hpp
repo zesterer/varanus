@@ -151,6 +151,7 @@ namespace Varanus
 	void log_setdate(int argc, char* argv[]);
 	void log_settime(int argc, char* argv[]);
 	void log_sett(int argc, char* argv[]);
+	void log_state(int argc, char* argv[]);
 	void log_logging(int argc, char* argv[]);
 }
 
