@@ -138,7 +138,7 @@ namespace Varanus
 	void log_status(int argc, char* argv[])
 	{
 		char buff[128];
-		log.get(log.length() - 1).toString(buff);
+		log.get(log.length() - 1).toCSV(buff);
 		println(buff);
 		println("Sampling rate is set to ", state.getSampleRate(), '.');
 	}

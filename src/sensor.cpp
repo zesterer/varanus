@@ -31,7 +31,8 @@
 #include <hts221.h>
 #include <LPS25H.h>
 
-#define USE_SIMULATOR
+// Should we use the simulator?
+//#define USE_SIMULATOR
 
 namespace Varanus
 {
@@ -48,6 +49,7 @@ namespace Varanus
 	HTS221 humidity(I2C_SDA, I2C_SCL);
 
 	// Sensors
+	Data sensor_sample();
 
 	#ifdef USE_SIMULATOR
 		// Simulated metrics

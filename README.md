@@ -20,6 +20,8 @@ In addition, I have done the following:
 
 ## Building
 
+__Note: If you are, for whatever reason, unable to build the project, please email me at joshua.s.barretto@gmail.com so that we can arrange a time for me to personally demonstrate the project and its successful compilation__
+
 Building Varanus is trivial with the Mbed CLI, as per the instructions on the Mbed website. You may have to modify mbed_settings.py to alter local environment build options.
 
 On Unix-like systems (I developed the project on Arch Linux), you may run the following to compile the project

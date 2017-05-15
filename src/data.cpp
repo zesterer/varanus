@@ -44,7 +44,7 @@ namespace Varanus
 		tm* timeval;
 		timeval = localtime(&this->datetime);
 
-		snprintf(buff, size, "%u-%u-%u, %u:%u:%u, %f, %f, %f",
+		snprintf(buff, size, "%u-%u-%u, %u:%u:%u, %.2fC, %.2f, %.2f%%",
 			timeval->tm_year + 1900, timeval->tm_mon, timeval->tm_mday,
 			timeval->tm_hour, timeval->tm_min, timeval->tm_sec,
 			this->temp, this->press, this->humid

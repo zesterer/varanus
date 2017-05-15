@@ -2,17 +2,17 @@
     {
         "module": "Fill", 
         "size": {
-            ".data": 4, 
+            ".data": 0, 
             ".bss": 14, 
-            ".text": 219
+            ".text": 207
         }
     }, 
     {
         "module": "Misc", 
         "size": {
-            ".data": 2584, 
+            ".data": 2572, 
             ".bss": 5255, 
-            ".text": 51934
+            ".text": 52134
         }
     }, 
     {
@@ -81,11 +81,11 @@
     }, 
     {
         "summary": {
-            "total_flash": 81267, 
-            "static_ram": 16032, 
+            "total_flash": 81439, 
+            "static_ram": 16016, 
             "stack": 0, 
             "heap": 0, 
-            "total_ram": 16032
+            "total_ram": 16016
         }
     }
 ]
