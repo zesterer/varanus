@@ -44,7 +44,19 @@ namespace Varanus
 			if (state.getLiveLogging())
 				log_live();
 
-			// Display the prompt
+			// You may ask why I don't have a dedicated live-logging thread.
+			// This is understandable. My conclusion is that one is not
+			// necessary. There is only one serial port on a F401RE, so I only
+			// want one set of things being transferred via serial at once. Why
+			// bother  with some silly 'mailbox' system? The board already has
+			// little RAM already. No need to torture it with more ringbuffers
+			// and I/O waiting queues that it ALREADY HAS built into the backend
+			// of the serial I/O system anyway. It's just pointless. Much better
+			// to only show one thing on screen at once. So that is what I have
+			// done, because simplicity is beautiful and complexity for the sake
+			// of complexity is satanic.
+
+			// Display the shell's prompt
 			print("$ ");
 
 			// Read a line of input

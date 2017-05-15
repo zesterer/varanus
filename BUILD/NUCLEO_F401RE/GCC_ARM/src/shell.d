@@ -152,5 +152,6 @@ BUILD/NUCLEO_F401RE/GCC_ARM/src/shell.o: src/shell.cpp \
  mbed-os/platform/mbed_sleep.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_rtc_time.h mbed-os/platform/Callback.h \
  mbed-os/platform/FunctionPointer.h include/varanus/out.hpp \
- include/varanus/com.hpp include/varanus/log.hpp mbed-os/rtos/rtos.h \
- include/varanus/data.hpp include/varanus/fmt.hpp
+ include/varanus/com.hpp include/varanus/state.hpp \
+ include/varanus/log.hpp mbed-os/rtos/rtos.h include/varanus/data.hpp \
+ include/varanus/fmt.hpp

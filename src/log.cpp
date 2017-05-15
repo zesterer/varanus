@@ -58,6 +58,9 @@ namespace Varanus
 			if (strcmp(argv[1], "settime") == 0)
 				log_settime(argc, argv);
 			else
+			if (strcmp(argv[1], "sett") == 0)
+				log_sett(argc, argv);
+			else
 			if (strcmp(argv[1], "state") == 0)
 				log_state(argc, argv);
 			else
@@ -74,13 +77,16 @@ namespace Varanus
 	// Log incoming data live
 	void log_live()
 	{
+		if (!state.getLoggingState())
+			return;
+
 		// Count total entries ever logged
 		size_t log_count = log.count();
 		while (true)
 		{
 			// Wait for half the sample rate or 1 second (to prevent sample misses)
 			float wait_time = min(state.getSampleRate() / 2.0f, 1.0f);
-			wait(wait_time);
+			Thread::wait(1000 * wait_time);
 
 			size_t ncount = log.count();
 			if (ncount != log_count) // Display the current entry
@@ -109,7 +115,7 @@ namespace Varanus
 			"Possible sub-commands include:\n",
 			"    help                     - Display this help screen\n",
 			"    count                    - Find the number of log entries in memory\n"
-			"    status                   - Display the most recent log status\n"
+			"    status                   - Display the most recent log and status\n"
 			"    read <n>                 - Display n log entries in CSV format\n",
 			"    read all                 - Display all log entries in CSV format\n",
 			"    delete <n>               - Delete the oldest n log entries\n",
@@ -134,6 +140,7 @@ namespace Varanus
 		char buff[128];
 		log.get(log.length() - 1).toString(buff);
 		println(buff);
+		println("Sampling rate is set to ", state.getSampleRate(), '.');
 	}
 
 	// Read logs command
@@ -270,6 +277,7 @@ namespace Varanus
 		{
 			float rate;
 			bool result = sscanf(argv[2], "%f", &rate) == 1;
+			rate = min(60.0f, max(0.1f, rate));
 
 			if (result)
 			{

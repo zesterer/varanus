@@ -48,7 +48,7 @@ namespace Varanus
 		size_t length()
 		{
 			this->gate.lock(); // Start critical section
-			size_t len = (MAXENTRIES + this->next - last) % MAXENTRIES;
+			size_t len = (MAXENTRIES + this->next - this->last) % MAXENTRIES;
 			this->gate.unlock(); // End critical section
 
 			return len;

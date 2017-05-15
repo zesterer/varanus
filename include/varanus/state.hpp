@@ -18,30 +18,40 @@
 * 	You should have received a copy of the GNU General Public License along with
 * 	Varanus.  If not, see <http://www.gnu.org/licenses/>.
 *
-* 	com.hpp : This file contains common utility function and object definitions
+* 	state.hpp : This file contains the definition of the program state
 * 	          for Varanus.
 *
 */
 
-#ifndef VARANUS_COM_HPP
-#define VARANUS_COM_HPP
-
-// Varanus
-#include <varanus/state.hpp>
-#include <varanus/log.hpp>
-#include <varanus/data.hpp>
+#ifndef VARANUS_STATE_HPP
+#define VARANUS_STATE_HPP
 
 // Mbed
 #include <mbed.h>
 
 namespace Varanus
 {
-	extern Serial tty;
-	extern State state;
-	extern Log<Data, 256> log;
+	// The program state
+	class State
+	{
+	private:
+		float sampleRate   = 15.0f;
+		bool  liveLogging  = false;
+		bool  loggingState = true;
+		bool  halted       = false;
+		Mutex gate;
 
-	template <typename T, typename U> T max(T a, U b) { return (a > b) ? a : b; }
-	template <typename T, typename U> T min(T a, U b) { return (a > b) ? b : a; }
+	public:
+		float getSampleRate();
+		bool getLiveLogging();
+		bool getLoggingState();
+		bool getHalted();
+
+		void setSampleRate(float sampleRate);
+		void setLiveLogging(float liveLogging);
+		void setLoggingState(float loggingState);
+		void halt();
+	};
 }
 
 #endif

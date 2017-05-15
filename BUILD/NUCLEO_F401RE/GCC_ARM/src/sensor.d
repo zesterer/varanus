@@ -1,6 +1,6 @@
 BUILD/NUCLEO_F401RE/GCC_ARM/src/sensor.o: src/sensor.cpp \
  BUILD/NUCLEO_F401RE/GCC_ARM/mbed_config.h include/varanus/com.hpp \
- include/varanus/log.hpp mbed-os/mbed.h mbed-os/rtos/rtos.h \
+ include/varanus/state.hpp mbed-os/mbed.h mbed-os/rtos/rtos.h \
  mbed-os/rtos/Thread.h mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h \
  mbed-os/platform/Callback.h mbed-os/platform/mbed_assert.h \
  mbed-os/platform/mbed_preprocessor.h mbed-os/platform/mbed_toolchain.h \
@@ -151,6 +151,6 @@ BUILD/NUCLEO_F401RE/GCC_ARM/src/sensor.o: src/sensor.cpp \
  mbed-os/platform/mbed_wait_api.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_sleep.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_rtc_time.h mbed-os/platform/Callback.h \
- mbed-os/platform/FunctionPointer.h mbed-os/rtos/rtos.h \
- include/varanus/data.hpp include/varanus/out.hpp include/varanus/fmt.hpp \
- hts221/hts221.h include/LPS25H.h
+ mbed-os/platform/FunctionPointer.h include/varanus/log.hpp \
+ mbed-os/rtos/rtos.h include/varanus/data.hpp include/varanus/out.hpp \
+ include/varanus/fmt.hpp hts221/hts221.h include/LPS25H.h

@@ -1,5 +1,5 @@
-BUILD/NUCLEO_F401RE/GCC_ARM/src/data.o: src/data.cpp \
- BUILD/NUCLEO_F401RE/GCC_ARM/mbed_config.h include/varanus/shell.hpp \
+BUILD/NUCLEO_F401RE/GCC_ARM/src/lps25h.o: src/lps25h.cpp \
+ BUILD/NUCLEO_F401RE/GCC_ARM/mbed_config.h include/LPS25H.h \
  mbed-os/mbed.h mbed-os/rtos/rtos.h mbed-os/rtos/Thread.h \
  mbed-os/rtos/rtx/TARGET_CORTEX_M/cmsis_os.h mbed-os/platform/Callback.h \
  mbed-os/platform/mbed_assert.h mbed-os/platform/mbed_preprocessor.h \
@@ -151,7 +151,4 @@ BUILD/NUCLEO_F401RE/GCC_ARM/src/data.o: src/data.cpp \
  mbed-os/platform/mbed_wait_api.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_sleep.h mbed-os/hal/sleep_api.h \
  mbed-os/platform/mbed_rtc_time.h mbed-os/platform/Callback.h \
- mbed-os/platform/FunctionPointer.h include/varanus/out.hpp \
- include/varanus/com.hpp include/varanus/state.hpp \
- include/varanus/log.hpp mbed-os/rtos/rtos.h include/varanus/data.hpp \
- include/varanus/fmt.hpp
+ mbed-os/platform/FunctionPointer.h

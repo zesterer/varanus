@@ -35,6 +35,10 @@
 
 namespace Varanus
 {
+	// Interrupt and locking things
+	Ticker sampleTicker;
+	Semaphore sampleSem(0);
+
 	// Indicator LED
 	static DigitalOut led1(LED1);
 
@@ -55,31 +59,63 @@ namespace Varanus
 		void sensor_simulate();
 	#endif
 
+	// What's going on here?
+	//
+	// This code sets up an interrupt service routine, sensor_tick, that is
+	// called whenever a sample interrupt occurs (at regular intervals). This
+	// ISR operates as fast as possible and releases control of a semaphore lock
+	// that triggers the main sensor thread to continue execution. Once this
+	// happens, the main sensor thread will take a sample, log it, and then
+	// flash the LED.
+	//
+	// Why is the sampling not occuring in an interrupt? Surely that would make
+	// timing more precise?
+	//
+	// Sadly, the time() and I2C code internally makes use of mutexes. Mutexes
+	// are not allowed in interrupt routines due to the risk of the software
+	// becoming soft-locked.
+
+	// Sensor tick interrupt
+	void sensor_tick()
+	{
+		// Notify the main sensor thread that an update is required
+		sampleSem.release();
+	}
+
 	// sensor_main() : The main sensor thread
 	void sensor_main()
 	{
+		// Init and configure the environmental sensor board
 		humidity.init();
 		humidity.calib();
 
-		while (true)
+		// Find the sample rate
+		float sampleRate = state.getSampleRate();
+
+		// Initiate the sampling ticker
+		sampleTicker.attach(sensor_tick, sampleRate);
+
+		while (state.getHalted())
 		{
-			// Time the code to syncronise sampling
-			Timer t;
-			t.start();
+			// Wait for a sampling interrupt to occur
+			sampleSem.wait();
 
-			Data entry;
-
-			#ifdef USE_SIMULATOR
-				entry.setDatetime(time(nullptr));
-				entry.setTemp(sim_temp);
-				entry.setPress(sim_press);
-				entry.setHumid(sim_humid);
-			#else
-				entry = sensor_sample();
+			// Sample data immediately
+			Data newEntry;
+			#ifdef USE_SIMULATOR // Read simulation data
+				newEntry.setDatetime(time(nullptr));
+				newEntry.setTemp(sim_temp);
+				newEntry.setPress(sim_press);
+				newEntry.setHumid(sim_humid);
+			#else // Read real data
+				newEntry = sensor_sample();
 			#endif
 
-			log.push(entry);
+			// Log the new entry created by the interrupt
+			if (state.getLoggingState())
+				log.push(newEntry);
 
+			// Simulate sensor data
 			#ifdef USE_SIMULATOR
 				sensor_simulate();
 			#endif
@@ -89,17 +125,15 @@ namespace Varanus
 			Thread::wait(50); // 50 ms
 			led1 = 0;
 
-			// Find the sample rate
-			float sampleRate = state.getSampleRate();
-
-			// Stop execution timer
-			t.stop();
-
-			// Read the timer and wait for the sample rate, subtracting elapsed
-			Thread::wait(1000 * (sampleRate - t.read()));
+			// Find the sample rate to check for an update
+			float newRate = state.getSampleRate();
+			if (newRate != sampleRate) // There's an update! Reset the interrupt
+				sampleTicker.attach(sensor_tick, newRate);
+			sampleRate = newRate;
 		}
 	}
 
+	// Read sensor information
 	Data sensor_sample()
 	{
 		Data entry;
@@ -118,6 +152,7 @@ namespace Varanus
 		return entry;
 	}
 
+	// Perform a simulation tick
 	#ifdef USE_SIMULATOR
 		void sensor_simulate()
 		{
